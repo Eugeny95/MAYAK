@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
             //     ),
             //   ],
             // ),
-            // ВОТ ДО ЭТОГО МЕСТА
+            // ВОТ ДО ЭТОГО 
 
             // SliverGrid(
             //   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
