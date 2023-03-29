@@ -53,6 +53,7 @@ class MyTheme {
             fontSize: 16,
             color: Color.fromARGB(255, 46, 46, 46),
           ),
+
           //Освоено
           bodyText1: TextStyle(
             fontFamily: FontNameDefault,

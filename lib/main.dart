@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 
 import 'package:flutter/cupertino.dart';
 
+import 'Dialogs/Addevent.dart';
 import 'Utils/ThemeData.dart';
 
 //я это смог
@@ -110,51 +111,83 @@ class MyWidget extends State {
   }
 
   int index = 0;
-  List<Widget> Screens = [HomePage(), BasketPage(), ProfilePage()];
+  List<Widget> Screens = [HomePage(), ProfilePage()];
 
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
     return Scaffold(
       body: Center(child: Screens[index]),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Color.fromARGB(255, 38, 38, 38),
-        currentIndex: index,
-        onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today_rounded),
-            label: 'События',
-          ),
-          // BottomNavigationBarItem(
-          //   icon:
-          //       // new Stack(children: <Widget>[
-          //       Icon(Icons.shopping_basket_outlined),
-          // (Provider.of<BasketObject>(context, listen: true).count != 0)
-          //     ? Positioned(
-          //         // draw a red marble
-          //         top: -2.0,
-          //         right: 0.0,
-          //         child: bad.Badge(
-          //           badgeContent: Text(
-          //             '${Provider.of<BasketObject>(context, listen: true).count}',
-          //             style: TextStyle(fontSize: 9),
-          //           ),
-          //         ))
-          //       : Text('')
-          // ]),
-          //   label: 'Корзина',
-          // ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.star),
-            label: 'Избранное',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Профиль',
-          ),
-        ],
+      bottomNavigationBar: BottomAppBar(
+          shape: CircularNotchedRectangle(),
+          elevation: 80,
+          notchMargin: 8,
+          clipBehavior: Clip.antiAlias,
+          // child: Container(
+          child: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed, // Fixed
+            backgroundColor: Colors.white,
+            elevation: 0,
+            selectedItemColor: Color.fromARGB(255, 38, 38, 38),
+            currentIndex: index,
+            onTap: _onItemTapped,
+
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.calendar_today_rounded),
+                label: 'События',
+              ),
+              // BottomNavigationBarItem(
+              //   icon:
+              //       // new Stack(children: <Widget>[
+              //       Icon(Icons.shopping_basket_outlined),
+              // (Provider.of<BasketObject>(context, listen: true).count != 0)
+              //     ? Positioned(
+              //         // draw a red marble
+              //         top: -2.0,
+              //         right: 0.0,
+              //         child: bad.Badge(
+              //           badgeContent: Text(
+              //             '${Provider.of<BasketObject>(context, listen: true).count}',
+              //             style: TextStyle(fontSize: 9),
+              //           ),
+              //         ))
+              //       : Text('')
+              // ]),
+              //   label: 'Корзина',
+              // ),
+              // BottomNavigationBarItem(
+              //   icon: Icon(Icons.star),
+              //   label: 'Избранное',
+              // ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: 'Профиль',
+              ),
+            ],
+          )),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        elevation: 4,
+        backgroundColor: Color.fromARGB(255, 167, 246, 218),
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AddEventDialog(
+                  // Provider.of<CoffeHouse>(context, listen: true)
+                  //     .photos
+                  );
+            },
+          );
+        },
+        // isExtended: true,
+        // materialTapTargetSize: MaterialTapTargetSize.padded,
+        child: Icon(Icons.add, color: Color.fromARGB(176, 0, 0, 0), size: 28),
+        // label: Text(
+        //   'Предложить событие',
+        //   style: TextStyle(color: Colors.black),
+        // ),
       ),
     );
   }
