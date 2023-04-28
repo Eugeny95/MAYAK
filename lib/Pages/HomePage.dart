@@ -8,6 +8,7 @@ import "package:collection/collection.dart";
 
 import '../Dialogs/Addevent.dart';
 
+
 class HomePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -17,63 +18,80 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late DateTime _selectedDate;
+
+  @override
+  void initState() {
+    super.initState();
+    _resetSelectedDate();
+  }
+
+  void _resetSelectedDate() {
+    _selectedDate = DateTime.now().add(const Duration(days: 0));
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: SingleChildScrollView(
-          child: Column(
-        children: [
-          // ПРОБЛЕМА ТУТ
-          CalendarTimeline(
-            initialDate: DateTime(2020, 4, 20),
-            firstDate: DateTime(2019, 1, 15),
-            lastDate: DateTime(2020, 11, 20),
-            onDateSelected: (date) => print(date),
-            leftMargin: 20,
-            monthColor: Colors.blueGrey,
-            dayColor: Colors.teal[200],
-            activeDayColor: Colors.white,
-            activeBackgroundDayColor: Colors.redAccent[100],
-            dotsColor: Color(0xFF333A47),
-            selectableDayPredicate: (date) => date.day != 23,
-            locale: 'ru',
+      body: ListView(
+        children: <Widget>[
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text(
+                  'Найди свое событие',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge!
+                      .copyWith(color: Color.fromARGB(255, 98, 178, 150)),
+                ),
+              ),
+             
+              CalendarTimeline(
+                showYears: false,
+                initialDate: _selectedDate,
+                firstDate: DateTime.now(),
+                lastDate: DateTime.now().add(const Duration(days: 365 * 4)),
+                onDateSelected: (date) => setState(() => _selectedDate = date),
+                leftMargin: 20,
+                monthColor: Colors.black38,
+                dayColor: Colors.black54,
+                dayNameColor: Colors.black54,
+                activeDayColor: Color.fromARGB(192, 0, 0, 0),
+                activeBackgroundDayColor: Color.fromARGB(255, 167, 246, 218),
+                dotsColor: Color.fromARGB(0, 17, 17, 17),
+                selectableDayPredicate: (date) => date.day != 23,
+                locale: 'ru',
+              ),
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.only(left: 16),
+                child: TextButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                        Color.fromARGB(255, 167, 246, 218)),
+                  ),
+                  child: const Text(
+                    'Мероприятия сегодня',
+                    style: TextStyle(color: Color(0xFF333A47)),
+                  ),
+                  onPressed: () => setState(() => _resetSelectedDate()),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Center(
+                child: Text(
+                  'Сегодня: $_selectedDate',
+                  style: const TextStyle(color: Colors.black),
+                ),
+              )
+            ],
           ),
-          //     // ВОТ ДО ЭТОГО
-
-          //     // SliverGrid(
-          //     //   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          //     //     maxCrossAxisExtent: 200.0,
-          //     //     mainAxisSpacing: 10.0,
-          //     //     crossAxisSpacing: 10.0,
-          //     //     childAspectRatio: 4.0,
-          //     //   ),
-          //     //   delegate: SliverChildBuilderDelegate(
-          //     //     (BuildContext context, int index) {
-          //     //       return Container(
-          //     //         alignment: Alignment.center,
-          //     //         color: Colors.teal[100 * (index % 9)],
-          //     //         child: Text('grid item $index'),
-          //     //       );
-          //     //     },
-          //     //     childCount: 20,
-          //     //   ),
-          //     // ),
-          //     // SliverFixedExtentList(
-          //     //   itemExtent: 50.0,
-          //     //   delegate: SliverChildBuilderDelegate(
-          //     //     (BuildContext context, int index) {
-          //     //       return Container(
-          //     //         alignment: Alignment.center,
-          //     //         color: Colors.lightBlue[100 * (index % 9)],
-          //     //         child: Text('list item $index'),
-          //     //       );
-          //     //     },
-          //     //   ),
-          //     // ),
         ],
-      )),
+      ),
     );
   }
 }

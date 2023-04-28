@@ -69,13 +69,13 @@ class _ProfilePageState extends State<ProfilePage> {
                           topRight: Radius.circular(30),
                           bottomRight: Radius.circular(30),
                           bottomLeft: Radius.circular(30)),
-                      color: Color.fromARGB(58, 151, 151, 151),
+                      color: Color.fromARGB(255, 151, 151, 151),
                       border: Border.all(
-                        color: Color.fromARGB(109, 153, 241, 175),
+                        color: Color.fromARGB(0, 153, 241, 175),
                         width: 1,
                       ),
                       image: DecorationImage(
-                          image: AssetImage("assets/YA.png"),
+                          image: AssetImage("assets/MK.png"),
                           fit: BoxFit.cover),
                     )),
                 SizedBox(
