@@ -1,0 +1,6 @@
+package com.yappa.mayak
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}

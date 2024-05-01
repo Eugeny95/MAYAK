@@ -4,7 +4,7 @@
             "name": "Flutter (lib/main.dart)",
             "type": "dart",
             "request": "launch",
-            "cwd": "pinzeria",
+            "cwd": "mayak",
             "program": "lib/main.dart"
         }
     ]

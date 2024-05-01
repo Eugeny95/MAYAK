@@ -9,13 +9,13 @@ part of 'category_http_model.dart';
 CategoryHttpModel _$CategoryHttpModelFromJson(Map<String, dynamic> json) =>
     CategoryHttpModel(
       category_name: json['category_name'] as String?,
-      items: (json['items'] as List<dynamic>?)
-          ?.map((e) => DishHttpModel.fromJson(e as Map<String, dynamic>))
+      events: (json['events'] as List<dynamic>?)
+          ?.map((e) => EventHttpModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$CategoryHttpModelToJson(CategoryHttpModel instance) =>
     <String, dynamic>{
       'category_name': instance.category_name,
-      'items': instance.items,
+      'events': instance.events,
     };
