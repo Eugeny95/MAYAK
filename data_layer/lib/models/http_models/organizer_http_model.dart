@@ -6,12 +6,12 @@ part 'organizer_http_model.g.dart';
 @JsonSerializable()
 class OrganizerHttpModel {
   /// The generated code assumes these values exist in JSON.
-  String? username;
   String? email;
+  String? username;
   String? phone;
 
   OrganizerHttpModel(
-      {required this.username, required this.email, required this.phone});
+      {required this.email, required this.username, required this.phone});
 
   factory OrganizerHttpModel.fromJson(Map<String, dynamic> json) =>
       _$OrganizerHttpModelFromJson(json);

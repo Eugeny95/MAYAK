@@ -15,7 +15,7 @@ OrganizerHttpModel _$OrganizerHttpModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$OrganizerHttpModelToJson(OrganizerHttpModel instance) =>
     <String, dynamic>{
-      'username': instance.username,
       'email': instance.email,
+      'username': instance.username,
       'phone': instance.phone,
     };

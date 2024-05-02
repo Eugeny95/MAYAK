@@ -1,13 +1,9 @@
+import 'dart:ffi';
+
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:data_layer/models/http_models/event_http_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mayak/buisiness/auth_bloc/auth_bloc.dart';
-
-import 'package:mayak/ui/constants.dart';
-
-import 'package:mayak/ui/all_events_page/components/select_event_dialog.dart';
 
 class AllEventsCategoryItem extends StatelessWidget {
   const AllEventsCategoryItem({
@@ -120,7 +116,7 @@ class EventCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15.0),
                   child: SizedBox.fromSize(
-                    size: const Size.fromRadius(70), // Image radius
+                    // size:  Size.fromRadius(70), // Image radius
                     child: CachedNetworkImage(
                         cacheKey: (eventHttpModel.image!.isEmpty)
                             ? ''
@@ -200,7 +196,7 @@ class EventCard extends StatelessWidget {
                   // Энергетическая ценность
                   (eventHttpModel.age_limit != 0)
                       ? Text(
-                          eventHttpModel.age_limit!,
+                          eventHttpModel.age_limit.toString(),
                           textDirection: TextDirection.ltr,
                           textAlign: TextAlign.right,
                           style: const TextStyle(

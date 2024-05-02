@@ -57,7 +57,7 @@ class _AllEventsPageState extends State<AllEventsPage> {
             },
             child: AllEventsCategoryItem(
               key: globalKey,
-              title: state.allEventsHttpModel!.all_events![i].category_name!,
+              title: state.allEventsHttpModel!.all_events![i].name_category!,
               events: List.generate(
                   state.allEventsHttpModel!.all_events![i].events!.length,
                   (index) => EventCard(
@@ -93,34 +93,6 @@ class _AllEventsPageState extends State<AllEventsPage> {
                         borderRadius: BorderRadius.only()),
                     child: const Cerousel(),
                   ),
-                  // Align(
-                  //   alignment: Alignment.topRight,
-                  //   child: Padding(
-                  //     padding: EdgeInsets.only(
-                  //         top: height * 0.055, right: width * 0.01),
-                  //     child: FloatingActionButton.small(
-                  //       backgroundColor: kPrimaryColor,
-                  //       onPressed: () {
-                  //         showDialog(
-                  //           context: context,
-                  //           builder: (BuildContext context) {
-                  //             return TableDialog();
-                  //           },
-                  //         );
-                  //       },
-                  //       child: Icon(
-                  //         Icons.table_bar_outlined,
-                  //         size: 22,
-                  //         color: Color.fromARGB(189, 255, 255, 255),
-                  //       ),
-                  //       shape: RoundedRectangleBorder(
-                  //           side: BorderSide(
-                  //               width: 1,
-                  //               color: Color.fromARGB(49, 255, 255, 255)),
-                  //           borderRadius: BorderRadius.circular(100)),
-                  //     ),
-                  //   ),
-                  // ),
                 ])),
             SliverAppBar(
               // backgroundColor: Colors.transparent,
@@ -180,7 +152,7 @@ class _AllEventsPageState extends State<AllEventsPage> {
                                       },
                                       child: Text(
                                           state.allEventsHttpModel!
-                                              .all_events![index].category_name
+                                              .all_events![index].name_category
                                               .toString(),
                                           style: const TextStyle(
                                               // fontFamily: 'Moniqa',

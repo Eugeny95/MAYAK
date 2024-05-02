@@ -8,7 +8,7 @@ part of 'category_http_model.dart';
 
 CategoryHttpModel _$CategoryHttpModelFromJson(Map<String, dynamic> json) =>
     CategoryHttpModel(
-      category_name: json['category_name'] as String?,
+      name_category: json['name_category'] as String?,
       events: (json['events'] as List<dynamic>?)
           ?.map((e) => EventHttpModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -16,6 +16,6 @@ CategoryHttpModel _$CategoryHttpModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$CategoryHttpModelToJson(CategoryHttpModel instance) =>
     <String, dynamic>{
-      'category_name': instance.category_name,
+      'name_category': instance.name_category,
       'events': instance.events,
     };

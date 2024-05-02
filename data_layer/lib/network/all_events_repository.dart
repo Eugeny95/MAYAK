@@ -8,7 +8,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 class AllEventsRepository {
   Future<AllEventsHttpModel> syncAllEvents() async {
     await Hive.initFlutter();
-    Response responce = await Dio().get('http://147.45.109.158:8881/api/menu');
+    Response responce =
+        await Dio().get('http://147.45.109.158:9001/events/categories');
     var box = await Hive.openBox('all_eventsBox1');
 
     await box.put('all_events', json.encode(responce.data));

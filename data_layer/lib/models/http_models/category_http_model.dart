@@ -6,10 +6,10 @@ part 'category_http_model.g.dart';
 @JsonSerializable()
 class CategoryHttpModel {
   /// The generated code assumes these values exist in JSON.
-  String? category_name;
+  String? name_category;
   List<EventHttpModel>? events;
 
-  CategoryHttpModel({required this.category_name, required this.events});
+  CategoryHttpModel({required this.name_category, required this.events});
 
   factory CategoryHttpModel.fromJson(Map<String, dynamic> json) =>
       _$CategoryHttpModelFromJson(json);

@@ -8,24 +8,24 @@ class EventHttpModel {
   /// The generated code assumes these values exist in JSON.
   String? name_event;
   String? time_event;
-  String? place_event;
   String? about_event;
-  String? price;
-  String? age_limit;
-  String? image;
+  int? age_limit;
   String? link;
+  String? place_event;
+  String? price;
+  String? image;
 
   List<OrganizerHttpModel> organizer;
 
   EventHttpModel({
     required this.name_event,
     required this.time_event,
-    required this.place_event,
     required this.about_event,
-    required this.price,
     required this.age_limit,
-    required this.image,
     required this.link,
+    required this.place_event,
+    required this.price,
+    required this.image,
     required this.organizer,
   });
 
