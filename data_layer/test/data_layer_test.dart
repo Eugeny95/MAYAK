@@ -6,8 +6,8 @@ import 'package:data_layer/data_layer.dart';
 
 void main() {
   test('get internet menu test', () async {
-    AllEventsHttpModel menuHttpModel =
+    AllEventsHttpModel allEventsHttpModel =
         await AllEventsRepository().syncAllEvents();
-    print(menuHttpModel.all_events!.length);
+    print(allEventsHttpModel);
   });
 }

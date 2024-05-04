@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:mayak/buisiness/all_events_page_bloc/all_events_bloc/all_events_bloc.dart';
+
 import 'package:mayak/buisiness/all_events_page_bloc/select_category_bloc/bloc/select_category_bloc.dart';
 import 'package:mayak/buisiness/auth_bloc/auth_bloc.dart';
 
@@ -12,6 +12,8 @@ import 'package:mayak/ui/all_events_page/all_events_screen.dart';
 import 'package:mayak/ui/profile_page/profile_page.dart';
 
 import 'package:mayak/ui/theme.dart';
+
+import 'buisiness/all_events_page_bloc/all_events_bloc/all_events_bloc.dart';
 
 void main() async {
   runApp(MyApp());

@@ -80,20 +80,20 @@ class _AllEventsPageState extends State<AllEventsPage> {
           physics: const ScrollPhysics(),
           controller: scrollController,
           slivers: <Widget>[
-            SliverAppBar(
-                pinned: true,
-                snap: false,
-                floating: false,
-                expandedHeight: height / 3.0,
-                // backgroundColor: Colors.transparent,
-                flexibleSpace: Stack(children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                        color: Color.fromARGB(255, 116, 116, 116),
-                        borderRadius: BorderRadius.only()),
-                    child: const Cerousel(),
-                  ),
-                ])),
+            // SliverAppBar(
+            //     pinned: true,
+            //     snap: false,
+            //     floating: false,
+            //     expandedHeight: height / 3.0,
+            //     // backgroundColor: Colors.transparent,
+            //     flexibleSpace: Stack(children: [
+            //       Container(
+            //         decoration: const BoxDecoration(
+            //             color: Color.fromARGB(255, 116, 116, 116),
+            //             borderRadius: BorderRadius.only()),
+            //         child: const Cerousel(),
+            //       ),
+            //     ])),
             SliverAppBar(
               // backgroundColor: Colors.transparent,
               toolbarHeight: 12,

@@ -10,7 +10,7 @@ class AllEventsRepository {
     await Hive.initFlutter();
     Response responce =
         await Dio().get('http://147.45.109.158:9001/events/categories');
-    var box = await Hive.openBox('all_eventsBox1');
+    var box = await Hive.openBox('menuBox1');
 
     await box.put('all_events', json.encode(responce.data));
     return AllEventsHttpModel.fromJson(responce.data);
@@ -18,7 +18,7 @@ class AllEventsRepository {
 
   Future<AllEventsHttpModel> getCachedAllEvents() async {
     await Hive.initFlutter();
-    var box = await Hive.openBox('all_eventsBox1');
+    var box = await Hive.openBox('menuBox1');
     Map<String, dynamic> temp = {};
     var data = json.decode(box.get('all_events'));
     return AllEventsHttpModel.fromJson(data);
