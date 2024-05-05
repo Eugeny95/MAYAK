@@ -68,10 +68,13 @@ class Cerousel extends StatelessWidget {
 
         title: Center(
           child: Container(
-            height: height * 0.08,
+            height: height * 0.03,
             child: Text(
-              'Наверное это МАЯК',
-              style: TextStyle(color: Colors.black),
+              'Хуяк! МАЯК',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: GoogleFonts.montserrat().fontFamily),
             ),
             // decoration: BoxDecoration(
             //   image: DecorationImage(
@@ -89,17 +92,17 @@ class Cerousel extends StatelessWidget {
         //       fontWeight: FontWeight.normal),
         // ),
       ),
-      body: CarouselSlider(
-        options: CarouselOptions(
-          height: height * 0.3,
-          // aspectRatio: 16 / 9,
-          scrollDirection: Axis.vertical,
-          autoPlay: true,
-          aspectRatio: 2.0,
-          enlargeCenterPage: true,
-        ),
-        items: imageSliders,
-      ),
+      // body: CarouselSlider(
+      //   options: CarouselOptions(
+      //     height: height * 0.3,
+      //     // aspectRatio: 16 / 9,
+      //     scrollDirection: Axis.vertical,
+      //     autoPlay: true,
+      //     aspectRatio: 2.0,
+      //     enlargeCenterPage: true,
+      //   ),
+      //   items: imageSliders,
+      // ),
     );
   }
 }

@@ -8,8 +8,8 @@ part of 'organizer_http_model.dart';
 
 OrganizerHttpModel _$OrganizerHttpModelFromJson(Map<String, dynamic> json) =>
     OrganizerHttpModel(
-      username: json['username'] as String?,
       email: json['email'] as String?,
+      username: json['username'] as String?,
       phone: json['phone'] as String?,
     );
 

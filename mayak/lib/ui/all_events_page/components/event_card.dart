@@ -43,7 +43,7 @@ class AllEventsCategoryItem extends StatelessWidget {
               childAspectRatio: 0.76,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              crossAxisCount: 2,
+              crossAxisCount: 1,
               children: [...events],
             ))
         // Center(
@@ -158,7 +158,7 @@ class EventCard extends StatelessWidget {
                 height: height / 17,
                 width: width * 0.41,
                 child: Text(
-                  eventHttpModel.name_event ?? '',
+                  eventHttpModel.name_event!,
                   textDirection: TextDirection.ltr,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
@@ -172,44 +172,52 @@ class EventCard extends StatelessWidget {
                 height: height * 0.02,
                 child: Row(children: [
                   SizedBox(
+                      height: height / 17,
+                      width: width * 0.41,
+                      child: Text(
+                        eventHttpModel.plece_event!,
+                        textDirection: TextDirection.ltr,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.normal,
+                          height: 0.97,
+                        ),
+                      )),
+                  SizedBox(
                     width: width / 40,
                   ),
-                  // Вес блюда
-                  (eventHttpModel.about_event != 0)
-                      ? Text(
-                          eventHttpModel.about_event!,
-                          textDirection: TextDirection.ltr,
-                          textAlign: TextAlign.right,
-                          style: const TextStyle(
-                            fontSize: 8,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        )
-                      : Container(),
                   SizedBox(
-                    width: width * 0.005,
-                  ),
-                  (eventHttpModel.age_limit != 0)
-                      ? const Icon(Icons.circle,
-                          size: 4, color: Color.fromARGB(188, 49, 49, 49))
-                      : Container(),
-                  // Энергетическая ценность
-                  (eventHttpModel.age_limit != 0)
-                      ? Text(
-                          eventHttpModel.age_limit.toString(),
-                          textDirection: TextDirection.ltr,
-                          textAlign: TextAlign.right,
-                          style: const TextStyle(
-                            fontSize: 8,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        )
-                      : Container()
+                      height: height / 17,
+                      width: width * 0.41,
+                      child: Text(
+                        eventHttpModel.time_event!,
+                        textDirection: TextDirection.ltr,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.normal,
+                          height: 0.97,
+                        ),
+                      )),
                 ]),
               ),
               SizedBox(
                 height: height * 0.005,
               ),
+              SizedBox(
+                  height: height / 17,
+                  width: width * 0.41,
+                  child: Text(
+                    eventHttpModel.price.toString(),
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.normal,
+                      height: 0.97,
+                    ),
+                  )),
               Container(
                 width: width / 2.5,
                 height: height / 22,
@@ -218,17 +226,6 @@ class EventCard extends StatelessWidget {
                       width: 1, color: Color.fromARGB(108, 88, 88, 88)),
                   color: Color.fromARGB(255, 243, 243, 243),
                   borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Center(
-                  child: Text(
-                    eventHttpModel.place_event!,
-                    textDirection: TextDirection.ltr,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 13,
-                      color: Color.fromARGB(204, 59, 59, 59),
-                    ),
-                  ),
                 ),
               ),
             ]),

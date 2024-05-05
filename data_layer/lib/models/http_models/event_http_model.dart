@@ -11,23 +11,22 @@ class EventHttpModel {
   String? about_event;
   int? age_limit;
   String? link;
-  String? place_event;
-  String? price;
+  String? plece_event;
+  int? price;
   String? image;
 
-  List<OrganizerHttpModel> organizer;
+  Map<String, dynamic> organizer;
 
-  EventHttpModel({
-    required this.name_event,
-    required this.time_event,
-    required this.about_event,
-    required this.age_limit,
-    required this.link,
-    required this.place_event,
-    required this.price,
-    required this.image,
-    required this.organizer,
-  });
+  EventHttpModel(
+      {required this.name_event,
+      required this.time_event,
+      required this.about_event,
+      required this.age_limit,
+      required this.link,
+      required this.plece_event,
+      required this.price,
+      required this.image,
+      required this.organizer});
 
   /// Connect the generated [_$PersonFromJson] function to the `fromJson`
   /// factory.

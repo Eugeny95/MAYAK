@@ -13,12 +13,10 @@ EventHttpModel _$EventHttpModelFromJson(Map<String, dynamic> json) =>
       about_event: json['about_event'] as String?,
       age_limit: (json['age_limit'] as num?)?.toInt(),
       link: json['link'] as String?,
-      place_event: json['place_event'] as String?,
-      price: json['price'] as String?,
+      plece_event: json['plece_event'] as String?,
+      price: (json['price'] as num?)?.toInt(),
       image: json['image'] as String?,
-      organizer: (json['organizer'] as List<dynamic>)
-          .map((e) => OrganizerHttpModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      organizer: json['organizer'] as Map<String, dynamic>,
     );
 
 Map<String, dynamic> _$EventHttpModelToJson(EventHttpModel instance) =>
@@ -28,7 +26,7 @@ Map<String, dynamic> _$EventHttpModelToJson(EventHttpModel instance) =>
       'about_event': instance.about_event,
       'age_limit': instance.age_limit,
       'link': instance.link,
-      'place_event': instance.place_event,
+      'plece_event': instance.plece_event,
       'price': instance.price,
       'image': instance.image,
       'organizer': instance.organizer,
