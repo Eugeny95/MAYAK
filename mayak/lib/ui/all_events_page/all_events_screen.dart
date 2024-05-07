@@ -189,6 +189,17 @@ class _AllEventsPageState extends State<AllEventsPage> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.delete),
+        onPressed: () {
+          // showDialog(
+          //   context: context,
+          //   builder: (BuildContext context) {
+          //     return NewEventDialog();
+          //   },
+          // );
+        },
+      ),
     );
   }
 }

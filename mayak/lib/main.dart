@@ -7,13 +7,15 @@ import 'package:mayak/buisiness/all_events_page_bloc/select_category_bloc/bloc/s
 import 'package:mayak/buisiness/auth_bloc/auth_bloc.dart';
 
 import 'package:mayak/generated/l10n.dart';
+
 import 'package:mayak/ui/constants.dart';
 import 'package:mayak/ui/all_events_page/all_events_screen.dart';
-import 'package:mayak/ui/profile_page/profile_page.dart';
 
 import 'package:mayak/ui/theme.dart';
 
 import 'buisiness/all_events_page_bloc/all_events_bloc/all_events_bloc.dart';
+import 'ui/new_event_page/create_event_page.dart';
+import 'ui/profile_page/profile_page.dart';
 
 void main() async {
   runApp(MyApp());
@@ -81,7 +83,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   List<Widget> screens = [
     AllEventsPage(),
-    AllEventsPage(),
+    ImageFromUrl(),
     ProfilePage(),
   ];
   int _selectedIndex = 0;

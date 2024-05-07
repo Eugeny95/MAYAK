@@ -7,7 +7,7 @@ part 'event_http_model.g.dart';
 class EventHttpModel {
   /// The generated code assumes these values exist in JSON.
   String? name_event;
-  String? time_event;
+  DateTime? time_event;
   String? about_event;
   int? age_limit;
   String? link;

@@ -56,13 +56,14 @@ dependencies:
   flutter_bloc: any
   easy_image_viewer: ^1.4.0
   visibility_detector: ^0.4.0+2
-  geocoding: ^2.1.1
+
   toggle_switch: ^2.1.0
   dio: any
   yaml_localizations: ^1.5.0
   flutter_slimy_card: ^1.0.2
   animated_flip_card: ^1.0.2
   flip_card: ^0.7.0
+  image_picker: ^1.0.8
  
  
   

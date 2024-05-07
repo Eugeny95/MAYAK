@@ -4,6 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:data_layer/models/http_models/event_http_model.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class AllEventsCategoryItem extends StatelessWidget {
   const AllEventsCategoryItem({
@@ -37,10 +39,11 @@ class AllEventsCategoryItem extends StatelessWidget {
         Padding(
             padding: const EdgeInsets.only(left: 10),
             child: GridView.count(
+              scrollDirection: Axis.vertical,
               padding: const EdgeInsets.all(5),
               crossAxisSpacing: 1,
-              mainAxisSpacing: 3,
-              childAspectRatio: 0.76,
+              mainAxisSpacing: 1,
+              childAspectRatio: 1.6,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               crossAxisCount: 1,
@@ -87,34 +90,25 @@ class EventCard extends StatelessWidget {
         },
         child: Stack(children: [
           Container(
-            width: width / 2.3,
+            width: width * 0.6,
             height: height / 3.6,
             padding: const EdgeInsets.only(top: 4.0),
             margin: const EdgeInsets.symmetric(horizontal: 1, vertical: 1),
             decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 1,
-                  blurRadius: 4,
-                  offset: Offset(0, 3), // changes position of shadow
-                ),
-              ],
-              border:
-                  Border.all(width: 2, color: Color.fromARGB(74, 88, 88, 88)),
-              borderRadius: BorderRadius.circular(15.0),
-              color: Color.fromARGB(221, 236, 234, 214),
-            ),
-            child: Column(children: [
+                border: Border.all(width: 2, color: Colors.transparent),
+                borderRadius: BorderRadius.circular(15.0),
+                color: Colors.transparent),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Container(
-                width: width / 2.4,
-                height: height / 7.6,
+                width: width * 0.7,
+                height: height * 0.15,
                 // padding: const EdgeInsets.all(2), // Border width
                 decoration: BoxDecoration(
                     color: Colors.grey[800],
-                    borderRadius: BorderRadius.circular(15.0)),
+                    borderRadius: BorderRadius.circular(10.0)),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15.0),
+                  borderRadius: BorderRadius.circular(10.0),
                   child: SizedBox.fromSize(
                     // size:  Size.fromRadius(70), // Image radius
                     child: CachedNetworkImage(
@@ -152,54 +146,54 @@ class EventCard extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: height * 0.005,
+                height: height * 0.01,
               ),
-              SizedBox(
-                height: height / 17,
-                width: width * 0.41,
-                child: Text(
-                  eventHttpModel.name_event!,
-                  textDirection: TextDirection.ltr,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.normal,
-                    height: 0.97,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: height * 0.02,
+                    child: Text(
+                      eventHttpModel.name_event!,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        height: 0.97,
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
               SizedBox(
-                height: height * 0.02,
+                height: height * 0.012,
                 child: Row(children: [
-                  SizedBox(
-                      height: height / 17,
-                      width: width * 0.41,
-                      child: Text(
-                        eventHttpModel.plece_event!,
-                        textDirection: TextDirection.ltr,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.normal,
-                          height: 0.97,
-                        ),
-                      )),
-                  SizedBox(
-                    width: width / 40,
+                  // SizedBox(
+                  //     height: height / 17,
+                  //     width: width * 0.41,
+                  //     child: Text(
+                  //       eventHttpModel.plece_event!,
+                  //       textDirection: TextDirection.ltr,
+                  //       textAlign: TextAlign.center,
+                  //       style: const TextStyle(
+                  //         fontSize: 13,
+                  //         fontWeight: FontWeight.normal,
+                  //         height: 0.97,
+                  //       ),
+                  //     )),
+
+                  Text(
+                    DateFormat("dd.MM.yyyy hh:mm")
+                        .format(eventHttpModel.time_event!),
+                    // DateFormat('dd.MM.yyyy')
+                    //     .format(eventHttpModel.time_event as DateTime),
+                    textAlign: TextAlign.start,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.normal,
+                      height: 0.97,
+                    ),
                   ),
-                  SizedBox(
-                      height: height / 17,
-                      width: width * 0.41,
-                      child: Text(
-                        eventHttpModel.time_event!,
-                        textDirection: TextDirection.ltr,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.normal,
-                          height: 0.97,
-                        ),
-                      )),
                 ]),
               ),
               SizedBox(
@@ -209,25 +203,14 @@ class EventCard extends StatelessWidget {
                   height: height / 17,
                   width: width * 0.41,
                   child: Text(
-                    eventHttpModel.price.toString(),
-                    textDirection: TextDirection.ltr,
-                    textAlign: TextAlign.center,
+                    '${eventHttpModel.price.toString()} руб  ',
+                    textAlign: TextAlign.start,
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.normal,
                       height: 0.97,
                     ),
                   )),
-              Container(
-                width: width / 2.5,
-                height: height / 22,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                      width: 1, color: Color.fromARGB(108, 88, 88, 88)),
-                  color: Color.fromARGB(255, 243, 243, 243),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
             ]),
           ),
         ]));
