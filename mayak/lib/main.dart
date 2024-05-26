@@ -15,7 +15,6 @@ import 'package:mayak/ui/all_events_page/all_events_screen.dart';
 import 'package:mayak/ui/theme.dart';
 
 import 'buisiness/all_events_page_bloc/all_events_bloc/all_events_bloc.dart';
-import 'ui/all_events_page/components/new_event_dialog.dart';
 import 'ui/new_event_page/create_event_page.dart';
 import 'ui/profile_page/profile_page.dart';
 
@@ -100,8 +99,11 @@ class _MainScreenState extends State<MainScreen> {
       body: Center(child: screens[_selectedIndex]),
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
-        backgroundColor: Colors.cyan,
-        child: Icon(Icons.add),
+        backgroundColor: Colors.black,
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
         onPressed: () {
           Navigator.push(
             context,
@@ -112,7 +114,7 @@ class _MainScreenState extends State<MainScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(
         iconSize: 30,
-        activeColor: Colors.cyan,
+        activeColor: Colors.black,
         inactiveColor: Colors.grey,
         icons: iconList,
         activeIndex: _selectedIndex,

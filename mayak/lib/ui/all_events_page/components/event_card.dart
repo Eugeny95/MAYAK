@@ -4,8 +4,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:data_layer/models/http_models/event_http_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:mayak/buisiness/auth_bloc/auth_bloc.dart';
+import 'package:mayak/ui/all_events_page/components/select_event_dialog.dart';
 
 class AllEventsCategoryItem extends StatelessWidget {
   const AllEventsCategoryItem({
@@ -76,26 +79,27 @@ class EventCard extends StatelessWidget {
     return GestureDetector(
         onTap: () {
           // Открытие диалога события!!!!!!
-          // AuthBloc authBloc = BlocProvider.of<AuthBloc>(context);
-          // showDialog(
-          //     context: context,
-          //     builder: (BuildContext context) {
-          //       return BlocProvider<AuthBloc>.value(
-          //           value: authBloc, //
+          AuthBloc authBloc = BlocProvider.of<AuthBloc>(context);
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return BlocProvider<AuthBloc>.value(
+                    value: authBloc, //
 
-          //           child: SelectEventDialog(
-          //             eventHttpModel: eventHttpModel,
-          //           ));
-          //     });
+                    child: SelectEventDialog(
+                      eventHttpModel: eventHttpModel,
+                    ));
+              });
         },
         child: Stack(children: [
           Container(
-            width: width * 0.6,
-            height: height / 3.6,
+            width: width * 0.7,
+            height: height * 0.23,
             padding: const EdgeInsets.only(top: 4.0),
             margin: const EdgeInsets.symmetric(horizontal: 1, vertical: 1),
             decoration: BoxDecoration(
-                border: Border.all(width: 2, color: Colors.transparent),
+                border: Border.all(
+                    width: 2, color: const Color.fromARGB(213, 0, 0, 0)),
                 borderRadius: BorderRadius.circular(15.0),
                 color: Colors.transparent),
             child:
@@ -200,7 +204,7 @@ class EventCard extends StatelessWidget {
                 height: height * 0.005,
               ),
               SizedBox(
-                  height: height / 17,
+                  height: height * 0.015,
                   width: width * 0.41,
                   child: Text(
                     '${eventHttpModel.price.toString()} руб  ',

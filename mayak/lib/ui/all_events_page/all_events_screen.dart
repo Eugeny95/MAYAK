@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mayak/buisiness/all_events_page_bloc/all_events_bloc/all_events_bloc.dart';
 import 'package:mayak/buisiness/all_events_page_bloc/select_category_bloc/bloc/select_category_bloc.dart';
-import 'package:mayak/ui/all_events_page/components/new_event_dialog.dart';
 
 import 'package:mayak/ui/constants.dart';
 import 'package:mayak/ui/all_events_page/components/carousel.dart';
@@ -85,7 +84,7 @@ class _AllEventsPageState extends State<AllEventsPage> {
                 pinned: true,
                 snap: false,
                 floating: false,
-                expandedHeight: height / 3.0,
+                expandedHeight: height / 20.0,
                 // backgroundColor: Colors.transparent,
                 flexibleSpace: Stack(children: [
                   Container(
