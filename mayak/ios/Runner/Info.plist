@@ -16,6 +16,8 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>mayak</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>Allow access to photo library</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

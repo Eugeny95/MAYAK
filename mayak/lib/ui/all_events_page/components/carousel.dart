@@ -70,7 +70,7 @@ class Cerousel extends StatelessWidget {
           child: Container(
             height: height * 0.03,
             child: Text(
-              'Хуяк! МАЯК',
+              'МАЯК',
               style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,

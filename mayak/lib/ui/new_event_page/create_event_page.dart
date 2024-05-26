@@ -1,20 +1,23 @@
-// ignore_for_file: unnecessary_null_comparison
-
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mayak/utils/Validator.dart';
 
-class ImageFromUrl extends StatefulWidget {
+class NewEventPage extends StatefulWidget {
+  NewEventPage();
   @override
-  _ImageFromUrlState createState() => _ImageFromUrlState();
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return NewEventPageState();
+  }
 }
 
-class _ImageFromUrlState extends State<ImageFromUrl> {
-  String imageUrl = '';
+class NewEventPageState extends State<NewEventPage> {
+  final picker = ImagePicker();
+  Dio dio = Dio();
 
-  Future<void> sendImageAndGetUrl() async {
+  Future<void> uploadImage() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
@@ -26,43 +29,105 @@ class _ImageFromUrlState extends State<ImageFromUrl> {
             await MultipartFile.fromFile(pickedFile.path, filename: fileName),
       });
 
-      Response response = await Dio()
-          .post('http://147.45.109.158:9001/upload/', data: formData);
+      Response response =
+          await dio.post('http://147.45.109.158:9001/upload/', data: formData);
 
       if (response.statusCode == 200) {
-        setState(() {
-          String eventImageUrl = response.data;
-//         // Handle the received image URL
-          print(
-              eventImageUrl); // Replace 'imageUrl' with the key where the image URL is stored in the response
-        });
+        String eventImageUrl = response.data;
+        // Handle the received image URL
+        print(eventImageUrl);
       } else {
-        // Handle error
+        // Handle any errors
       }
     }
   }
 
+  String? name_event;
+  DateTime? time_event;
+  String? plece_event;
+  String? about_event;
+  int? price;
+  int? age_limit;
+  late Future eventImageUrl;
+  String? link;
+  String? name_category;
+
   @override
   Widget build(BuildContext context) {
-    String? eventImageUrl;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Image from URL'),
+        title: Text('Предложить новость'),
       ),
       body: Column(
         children: [
-          ElevatedButton(
-            onPressed: sendImageAndGetUrl,
-            child: Text('Select Image'),
-          ),
           Center(
-              child: eventImageUrl != null
-                  ? Image.network(eventImageUrl)
-                  : Container(
-                      color: Colors.red,
-                      height: 50,
-                      width: 50,
-                    )),
+              child: ElevatedButton(
+            onPressed: uploadImage,
+            child: Text('Upload Image'),
+          )),
+          Padding(padding: EdgeInsets.only(top: height * 0.01)),
+          TextFormField(
+            textCapitalization: TextCapitalization.words,
+            cursorColor: Color.fromARGB(248, 24, 24, 24),
+            validator: (value) => Validator.isEmptyValid(value!),
+            onChanged: (String value) {
+              name_event = value;
+            },
+            decoration: InputDecoration(
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(248, 24, 24, 24), width: 2.0)),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(231, 29, 29, 29),
+                    width: 2.0,
+                  ),
+                ),
+                prefixIcon: const Icon(Icons.person_add,
+                    color: Color.fromARGB(248, 24, 24, 24)),
+                labelText: 'Название события',
+                labelStyle:
+                    const TextStyle(color: Color.fromARGB(248, 24, 24, 24))),
+          ),
+          Padding(padding: EdgeInsets.only(top: height * 0.01)),
+          TextFormField(
+            cursorColor: const Color.fromARGB(248, 24, 24, 24),
+            keyboardType: TextInputType.number,
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.allow(RegExp(r'[0-9.,]'))
+            ],
+            validator: (value) => Validator.isPhoneValid('8' + value!),
+            onChanged: (String value) {
+              // phone = '8' + value;
+            },
+            decoration: InputDecoration(
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(248, 24, 24, 24), width: 2.0)),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(231, 29, 29, 29),
+                    width: 2.0,
+                  ),
+                ),
+                prefixIcon: const Icon(Icons.phone_iphone,
+                    color: Color.fromARGB(248, 24, 24, 24)),
+                labelText: 'Телефон',
+                prefixText: '+7',
+                labelStyle:
+                    const TextStyle(color: Color.fromARGB(248, 24, 24, 24))),
+          ),
         ],
       ),
     );
