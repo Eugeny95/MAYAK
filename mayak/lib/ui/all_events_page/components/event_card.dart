@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:data_layer/models/http_models/event_http_model.dart';
+import 'package:data_layer/models/http_models/organizer_http_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,9 +33,9 @@ class AllEventsCategoryItem extends StatelessWidget {
           child: Text(
             title,
             style: const TextStyle(
-              fontSize: 18,
+              fontSize: 22,
               // fontFamily: 'Moniqa',
-              color: Colors.black54,
+              color: Color.fromARGB(212, 0, 0, 0),
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -95,7 +96,7 @@ class EventCard extends StatelessWidget {
           Container(
             width: width * 0.7,
             height: height * 0.23,
-            padding: const EdgeInsets.only(top: 4.0),
+            // padding: const EdgeInsets.only(top: 4.0),
             margin: const EdgeInsets.symmetric(horizontal: 1, vertical: 1),
             decoration: BoxDecoration(
                 border: Border.all(
@@ -112,7 +113,9 @@ class EventCard extends StatelessWidget {
                     color: Colors.grey[800],
                     borderRadius: BorderRadius.circular(10.0)),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10)),
                   child: SizedBox.fromSize(
                     // size:  Size.fromRadius(70), // Image radius
                     child: CachedNetworkImage(
@@ -156,6 +159,9 @@ class EventCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(
+                    width: width * 0.02,
+                  ),
+                  SizedBox(
                     height: height * 0.02,
                     child: Text(
                       eventHttpModel.name_event!,
@@ -170,24 +176,16 @@ class EventCard extends StatelessWidget {
                 ],
               ),
               SizedBox(
+                height: height * 0.005,
+              ),
+              SizedBox(
                 height: height * 0.012,
                 child: Row(children: [
-                  // SizedBox(
-                  //     height: height / 17,
-                  //     width: width * 0.41,
-                  //     child: Text(
-                  //       eventHttpModel.plece_event!,
-                  //       textDirection: TextDirection.ltr,
-                  //       textAlign: TextAlign.center,
-                  //       style: const TextStyle(
-                  //         fontSize: 13,
-                  //         fontWeight: FontWeight.normal,
-                  //         height: 0.97,
-                  //       ),
-                  //     )),
-
+                  SizedBox(
+                    width: width * 0.01,
+                  ),
                   Text(
-                    DateFormat("dd.MM.yyyy hh:mm")
+                    DateFormat(" HH:mm dd.MM.yyyy")
                         .format(eventHttpModel.time_event!),
                     // DateFormat('dd.MM.yyyy')
                     //     .format(eventHttpModel.time_event as DateTime),
@@ -203,20 +201,63 @@ class EventCard extends StatelessWidget {
               SizedBox(
                 height: height * 0.005,
               ),
-              SizedBox(
-                  height: height * 0.015,
-                  width: width * 0.41,
-                  child: Text(
-                    '${eventHttpModel.price.toString()} руб  ',
+              Row(
+                children: [
+                  SizedBox(
+                    width: width * 0.01,
+                  ),
+                  Text(
+                    ' +${eventHttpModel.age_limit.toString()} ',
                     textAlign: TextAlign.start,
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.normal,
                       height: 0.97,
                     ),
-                  )),
+                  ),
+                ],
+              )
             ]),
           ),
+          Positioned(
+              top: height * 0.12,
+              right: 0.0,
+              left: 0.0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(237, 19, 19, 19),
+                          border: Border.all(
+                              width: 1,
+                              color: Color.fromARGB(211, 255, 255, 255)),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: width * 0.01,
+                            ),
+                            Icon(
+                              Icons.local_activity,
+                              color: Colors.white,
+                              size: 18,
+                            ),
+                            Text(
+                              ' От ${eventHttpModel.price.toString()} руб  ',
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        )),
+                  ),
+                ],
+              )),
         ]));
   }
 }

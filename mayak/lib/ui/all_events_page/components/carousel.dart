@@ -63,7 +63,7 @@ class Cerousel extends StatelessWidget {
     return Scaffold(
       // backgroundColor: kPrimaryColor.withOpacity(0.9),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 252, 241, 232),
+        backgroundColor: Color.fromARGB(224, 23, 23, 23),
         toolbarHeight: height * 0.07,
 
         title: Center(
@@ -72,7 +72,7 @@ class Cerousel extends StatelessWidget {
             child: Text(
               'МАЯК',
               style: TextStyle(
-                  color: Colors.black,
+                  color: const Color.fromARGB(255, 255, 255, 255),
                   fontWeight: FontWeight.bold,
                   fontFamily: GoogleFonts.montserrat().fontFamily),
             ),

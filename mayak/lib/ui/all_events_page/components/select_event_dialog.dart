@@ -1,18 +1,25 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:data_layer/models/http_models/event_http_model.dart';
+import 'package:data_layer/models/http_models/organizer_http_model.dart';
 
 import 'package:easy_image_viewer/easy_image_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mayak/buisiness/auth_bloc/auth_bloc.dart';
+import 'package:smart_text_flutter/smart_text_flutter.dart';
 
 // TODO можно в будущем сделать категории подгружаемыми с интернета
 
 // ignore: must_be_immutable
 class SelectEventDialog extends StatefulWidget {
   EventHttpModel eventHttpModel;
+  // OrganizerHttpModel organizerHttpModel;
 
-  SelectEventDialog({super.key, required this.eventHttpModel});
+  SelectEventDialog({
+    super.key,
+    required this.eventHttpModel,
+    // required this.organizerHttpModel
+  });
 
   // SelectDishDialog(this.dish);
   @override
@@ -28,6 +35,7 @@ class SelectEventDialogState extends State<SelectEventDialog> {
     List<Widget> propertiesWidget = [];
     List<Widget> volumesWidget = [];
     EventHttpModel eventHttpModel = widget.eventHttpModel;
+    // OrganizerHttpModel organizerHttpModel = widget.organizerHttpModel;
 
     // for (Option volume in dish.fieldSelection.fields) {
     //   volumesWidget.add(Row(children: [
@@ -54,300 +62,382 @@ class SelectEventDialogState extends State<SelectEventDialog> {
     double fontSize = width / 25;
     //
     return AlertDialog(
-        contentPadding: EdgeInsets.all(10),
+        contentPadding: EdgeInsets.all(0),
         insetPadding: const EdgeInsets.all(20),
-        backgroundColor: Color.fromARGB(255, 236, 234, 214),
+        backgroundColor: Color.fromARGB(246, 240, 240, 240),
         actionsAlignment: MainAxisAlignment.start,
-        content: SizedBox(
-          //  height: height * 0.9,
-          width: width * 0.96,
-          child: ListView(shrinkWrap: true, children: [
-            Column(mainAxisSize: MainAxisSize.max, children: [
-              InkWell(
-                onTap: () {
-                  final imageProvider =
-                      Image.network(eventHttpModel.image!).image;
-                  showImageViewer(context, imageProvider,
-                      swipeDismissible: true, doubleTapZoomable: true);
-                },
-                child: Container(
-                  height: height / 3.5,
-                  decoration: BoxDecoration(
-                      color: Colors.black54,
-                      border: Border.all(
-                          width: 1,
-                          color: const Color.fromARGB(211, 45, 45, 45)),
-                      borderRadius: BorderRadius.circular(20.0)),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: CachedNetworkImage(
-                        imageUrl: (eventHttpModel.image!.isEmpty)
-                            ? ''
-                            : eventHttpModel.image!,
-                        placeholder: (context, url) =>
-                            const CircularProgressIndicator(),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
-                        fit: BoxFit.cover),
+        content: Stack(children: [
+          SizedBox(
+            //  height: height * 0.9,
+            width: width * 0.96,
+            child: ListView(shrinkWrap: true, children: [
+              Column(mainAxisSize: MainAxisSize.max, children: [
+                InkWell(
+                  onTap: () {
+                    final imageProvider =
+                        Image.network(eventHttpModel.image!).image;
+                    showImageViewer(context, imageProvider,
+                        swipeDismissible: true, doubleTapZoomable: true);
+                  },
+                  child: Container(
+                    height: height * 0.32,
+                    decoration: BoxDecoration(
+                        color: Colors.black54,
+                        border: Border.all(
+                            width: 1,
+                            color: const Color.fromARGB(211, 45, 45, 45)),
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10))),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10)),
+                      child: CachedNetworkImage(
+                          imageUrl: (eventHttpModel.image!.isEmpty)
+                              ? ''
+                              : eventHttpModel.image!,
+                          placeholder: (context, url) =>
+                              const CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                          fit: BoxFit.cover),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: height * 0.005,
-              ),
-              Text(
-                eventHttpModel.name_event ?? '',
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.normal),
-              ),
-              SizedBox(
-                height: height * 0.005,
-              ),
-              (eventHttpModel.about_event != '')
-                  ? SizedBox(
-                      width: width * 0.9,
-                      height: height * 0.002,
-                      child: Container(
-                        decoration: const BoxDecoration(
-                            gradient: LinearGradient(colors: [
-                          Color.fromARGB(0, 255, 255, 255),
-                          Color.fromARGB(220, 0, 0, 0),
-                          Color.fromARGB(0, 255, 255, 255),
-                        ])),
+                SizedBox(
+                  height: height * 0.005,
+                ),
+                Text(
+                  eventHttpModel.name_event ?? '',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.normal),
+                ),
+                SizedBox(
+                  height: height * 0.005,
+                ),
+                (eventHttpModel.about_event != '')
+                    ? SizedBox(
+                        width: width * 0.9,
+                        height: height * 0.002,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              gradient: LinearGradient(colors: [
+                            Color.fromARGB(0, 255, 255, 255),
+                            Color.fromARGB(220, 0, 0, 0),
+                            Color.fromARGB(0, 255, 255, 255),
+                          ])),
+                        ),
+                      )
+                    : Container(),
+                SizedBox(
+                  height: height * 0.01,
+                ),
+                Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      (eventHttpModel.about_event != '')
+                          ? const Text(
+                              'Описание: ',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            )
+                          : Container(),
+                      (eventHttpModel.about_event != '')
+                          ? SizedBox(
+                              // height: height / 7.5,
+                              child: Text(eventHttpModel.about_event ?? '',
+                                  textAlign: TextAlign.center))
+                          : Container(),
+                      SizedBox(
+                        height: height * 0.01,
                       ),
-                    )
-                  : Container(),
-              SizedBox(
-                height: height * 0.01,
-              ),
-              Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    (eventHttpModel.about_event != '')
-                        ? const Text(
-                            'Описание: ',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          )
-                        : Container(),
-                    (eventHttpModel.about_event != '')
-                        ? SizedBox(
-                            // height: height / 7.5,
-                            child: Text(eventHttpModel.about_event ?? '',
-                                textAlign: TextAlign.center))
-                        : Container(),
-                    SizedBox(
-                      height: height * 0.01,
-                    ),
-                    SizedBox(
-                      width: width * 0.9,
-                      height: height * 0.002,
-                      child: Container(
-                        decoration: const BoxDecoration(
-                            gradient: LinearGradient(colors: [
-                          Color.fromARGB(220, 0, 0, 0),
-                          Color.fromARGB(0, 255, 255, 255),
-                          Color.fromARGB(0, 255, 255, 255),
-                        ])),
+                      SizedBox(
+                        width: width * 0.9,
+                        height: height * 0.002,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              gradient: LinearGradient(colors: [
+                            Color.fromARGB(220, 0, 0, 0),
+                            Color.fromARGB(0, 255, 255, 255),
+                            Color.fromARGB(0, 255, 255, 255),
+                          ])),
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: height * 0.01,
-                    ),
-                    // Divider(color: const Color.fromARGB(255, 255, 255, 255)),
-                  ]),
-              Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    (eventHttpModel.link != '')
-                        ? const Text(
-                            'Сылка на мероприятие: ',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          )
-                        : Container(),
-                    (eventHttpModel.link != '')
-                        ? SizedBox(
-                            // height: height / 7.5,
-                            child: Text(eventHttpModel.link ?? '',
-                                textAlign: TextAlign.center))
-                        : Container(),
-                    SizedBox(
-                      height: height * 0.01,
-                    ),
-                    SizedBox(
-                      width: width * 0.9,
-                      height: height * 0.002,
-                      child: Container(
-                        decoration: const BoxDecoration(
-                            gradient: LinearGradient(colors: [
-                          Color.fromARGB(220, 0, 0, 0),
-                          Color.fromARGB(0, 255, 255, 255),
-                          Color.fromARGB(0, 255, 255, 255),
-                        ])),
+                      SizedBox(
+                        height: height * 0.01,
                       ),
-                    ),
-                    SizedBox(
-                      height: height * 0.01,
-                    ),
-                    // Divider(color: const Color.fromARGB(255, 255, 255, 255)),
-                  ]),
-              propertiesWidget.isNotEmpty
-                  ? Padding(padding: EdgeInsets.only(top: height * 0.02))
-                  : const Column(),
-              Column(children: volumesWidget),
-              propertiesWidget.isNotEmpty
-                  ? SizedBox(
-                      width: width * 0.9,
-                      height: height * 0.002,
-                      child: Container(
-                        decoration: const BoxDecoration(
-                            gradient: LinearGradient(colors: [
-                          Color.fromARGB(0, 255, 255, 255),
-                          Color.fromARGB(220, 0, 0, 0),
-                          Color.fromARGB(0, 255, 255, 255),
-                        ])),
+                      // Divider(color: const Color.fromARGB(255, 255, 255, 255)),
+                    ]),
+                Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      (eventHttpModel.link != '')
+                          ? const Text(
+                              'Сылка на мероприятие: ',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            )
+                          : Container(),
+                      (eventHttpModel.link != '')
+                          ? SizedBox(
+                              // height: height / 7.5,
+                              child: SmartText(
+                              eventHttpModel.link ?? '',
+                            ))
+                          : Container(),
+                      SizedBox(
+                        height: height * 0.01,
                       ),
-                    )
-                  : Row(),
+                      SizedBox(
+                        width: width * 0.9,
+                        height: height * 0.002,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              gradient: LinearGradient(colors: [
+                            Color.fromARGB(220, 0, 0, 0),
+                            Color.fromARGB(0, 255, 255, 255),
+                            Color.fromARGB(0, 255, 255, 255),
+                          ])),
+                        ),
+                      ),
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      // Divider(color: const Color.fromARGB(255, 255, 255, 255)),
+                    ]),
 
-              /*Блок добавок МОДИФИКАТОРЫ
+                // ОРГАНИЗАТОР МОДЕЛЬ
+                // Column(
+                //     mainAxisAlignment: MainAxisAlignment.start,
+                //     crossAxisAlignment: CrossAxisAlignment.start,
+                //     children: [
+                //       (eventHttpModel.link != '')
+                //           ? const Text(
+                //               'Организатор: ',
+                //               style: TextStyle(fontWeight: FontWeight.bold),
+                //             )
+                //           : Container(),
+                //       (organizerHttpModel.username != '')
+                //           ? SizedBox(
+                //               // height: height / 7.5,
+                //               child: Text(
+                //               organizerHttpModel.username ?? '',
+                //             ))
+                //           : Container(),
+                //       SizedBox(
+                //         height: height * 0.01,
+                //       ),
+                //       SizedBox(
+                //         width: width * 0.9,
+                //         height: height * 0.002,
+                //         child: Container(
+                //           decoration: const BoxDecoration(
+                //               gradient: LinearGradient(colors: [
+                //             Color.fromARGB(220, 0, 0, 0),
+                //             Color.fromARGB(0, 255, 255, 255),
+                //             Color.fromARGB(0, 255, 255, 255),
+                //           ])),
+                //         ),
+                //       ),
+                //       SizedBox(
+                //         height: height * 0.01,
+                //       ),
+                //       // Divider(color: const Color.fromARGB(255, 255, 255, 255)),
+                //     ]),
+                propertiesWidget.isNotEmpty
+                    ? Padding(padding: EdgeInsets.only(top: height * 0.02))
+                    : const Column(),
+                Column(children: volumesWidget),
+                propertiesWidget.isNotEmpty
+                    ? SizedBox(
+                        width: width * 0.9,
+                        height: height * 0.002,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              gradient: LinearGradient(colors: [
+                            Color.fromARGB(0, 255, 255, 255),
+                            Color.fromARGB(220, 0, 0, 0),
+                            Color.fromARGB(0, 255, 255, 255),
+                          ])),
+                        ),
+                      )
+                    : Row(),
 
-              propertiesWidget.isNotEmpty
-                  ? const Text(
-                      'Выберите добавки',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    )
-                  : const Column(),
-              Padding(padding: EdgeInsets.only(top: height * 0.02)),
-              // dish.options.isEmpty
-
-              propertiesWidget.isNotEmpty
-                  ? Row(children: [
-                      Expanded(
-                        flex: 6,
-                        child: Text('Название добавки',
+                /*Блок добавок МОДИФИКАТОРЫ
+          
+                propertiesWidget.isNotEmpty
+                    ? const Text(
+                        'Выберите добавки',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      )
+                    : const Column(),
+                Padding(padding: EdgeInsets.only(top: height * 0.02)),
+                // dish.options.isEmpty
+          
+                propertiesWidget.isNotEmpty
+                    ? Row(children: [
+                        Expanded(
+                          flex: 6,
+                          child: Text('Название добавки',
+                              style: TextStyle(
+                                  color: const Color.fromARGB(255, 236, 43, 43),
+                                  fontSize: fontSize)),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: Text(
+                            'Цена,₽',
                             style: TextStyle(
-                                color: const Color.fromARGB(255, 236, 43, 43),
-                                fontSize: fontSize)),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          'Цена,₽',
-                          style: TextStyle(
-                              color: const Color.fromARGB(255, 246, 35, 35),
-                              fontSize: fontSize),
+                                color: const Color.fromARGB(255, 246, 35, 35),
+                                fontSize: fontSize),
+                          ),
                         ),
+                      ])
+                    : const Row(),
+                Column(children: propertiesWidget),
+          
+                // CounterWidget(
+                //   onChange: ((counter) {
+                //     dish.count = counter;
+                //   }),
+                // ),
+                propertiesWidget.isNotEmpty
+                    ? SizedBox(
+                        width: width * 0.9,
+                        height: height * 0.002,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              gradient: LinearGradient(colors: [
+                            Color.fromARGB(0, 255, 255, 255),
+                            Color.fromARGB(220, 255, 255, 255),
+                            Color.fromARGB(0, 255, 255, 255),
+                          ])),
+                        ),
+                      )
+                    : const Row(),
+                propertiesWidget.isNotEmpty
+                    ? const Row(children: [
+                        Expanded(
+                          flex: 2,
+                          child: Text(
+                            'Цена,₽',
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 226, 226, 226),
+                                fontSize: 15),
+                          ),
+                        ),
+                      ])
+                    : const Row(),
+                Padding(padding: EdgeInsets.only(top: height * 0.01)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Цена:',
+                      textDirection: TextDirection.ltr,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Color.fromARGB(250, 243, 243, 243),
                       ),
-                    ])
-                  : const Row(),
-              Column(children: propertiesWidget),
+                    ),
+                    SizedBox(
+                      width: width * 0.03,
+                    ),
+                    Text(
+                      '${dishHttpModel.currentPrice!.toInt()} ₽',
+                      textDirection: TextDirection.ltr,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Color.fromARGB(238, 243, 243, 243),
+                      ),
+                    ),
+                  ],
+                ),
+          
+                */
+                Padding(padding: EdgeInsets.only(top: height * 0.02)),
+                BlocProvider.of<AuthBloc>(context).isAuth()
+                    ? ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
 
-              // CounterWidget(
-              //   onChange: ((counter) {
-              //     dish.count = counter;
-              //   }),
-              // ),
-              propertiesWidget.isNotEmpty
-                  ? SizedBox(
-                      width: width * 0.9,
-                      height: height * 0.002,
-                      child: Container(
-                        decoration: const BoxDecoration(
-                            gradient: LinearGradient(colors: [
-                          Color.fromARGB(0, 255, 255, 255),
-                          Color.fromARGB(220, 255, 255, 255),
-                          Color.fromARGB(0, 255, 255, 255),
-                        ])),
-                      ),
-                    )
-                  : const Row(),
-              propertiesWidget.isNotEmpty
-                  ? const Row(children: [
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          'Цена,₽',
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 226, 226, 226),
-                              fontSize: 15),
+                            // side: BorderSide(color: kFourthColor, width: 2)
+                            // <-- Radius
+                          ),
+                          elevation: 8,
+                          minimumSize: Size(height * 0.35, width * 0.12),
                         ),
-                      ),
-                    ])
-                  : const Row(),
-              Padding(padding: EdgeInsets.only(top: height * 0.01)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Цена:',
-                    textDirection: TextDirection.ltr,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: Color.fromARGB(250, 243, 243, 243),
-                    ),
-                  ),
-                  SizedBox(
-                    width: width * 0.03,
-                  ),
-                  Text(
-                    '${dishHttpModel.currentPrice!.toInt()} ₽',
-                    textDirection: TextDirection.ltr,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Color.fromARGB(238, 243, 243, 243),
-                    ),
+                        onPressed: () {},
+                        child: const Text(
+                          'Добавить в корзину',
+                          style:
+                              TextStyle(color: Color.fromARGB(225, 66, 66, 66)),
+                        ))
+                    : ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            // side: BorderSide(color: kFourthColor, width: 2)
+                            // <-- Radius
+                          ),
+                          elevation: 5,
+                          minimumSize: Size(height * 0.35, width * 0.12),
+                        ),
+                        onPressed: () {},
+                        child: Text(
+                          'Авторизуйтесь, чтобы добавить в корзину',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Color.fromARGB(225, 66, 66, 66),
+                              fontSize: 13),
+                        )),
+                Padding(padding: EdgeInsets.only(top: height * 0.02)),
+              ]),
+            ]),
+          ),
+          Positioned(
+              top: height * 0.29,
+              right: 0.0,
+              left: 0.0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(237, 19, 19, 19),
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: width * 0.01,
+                            ),
+                            Icon(
+                              Icons.child_care,
+                              color: Colors.white,
+                              size: 22,
+                            ),
+                            Text(
+                              '  +${eventHttpModel.age_limit.toString()} ',
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        )),
                   ),
                 ],
-              ),
-
-              */
-              Padding(padding: EdgeInsets.only(top: height * 0.02)),
-              BlocProvider.of<AuthBloc>(context).isAuth()
-                  ? ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-
-                          // side: BorderSide(color: kFourthColor, width: 2)
-                          // <-- Radius
-                        ),
-                        elevation: 8,
-                        minimumSize: Size(height * 0.35, width * 0.12),
-                      ),
-                      onPressed: () {},
-                      child: const Text(
-                        'Добавить в корзину',
-                        style:
-                            TextStyle(color: Color.fromARGB(225, 66, 66, 66)),
-                      ))
-                  : ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          // side: BorderSide(color: kFourthColor, width: 2)
-                          // <-- Radius
-                        ),
-                        elevation: 5,
-                        minimumSize: Size(height * 0.35, width * 0.12),
-                      ),
-                      onPressed: () {},
-                      child: Text(
-                        'Авторизуйтесь, чтобы добавить в корзину',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Color.fromARGB(225, 66, 66, 66),
-                            fontSize: 13),
-                      )),
-              Padding(padding: EdgeInsets.only(top: height * 0.02)),
-            ])
-          ]),
-        ),
+              )),
+        ]),
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(23))));
     // TODO: implement build

@@ -65,6 +65,8 @@ dependencies:
   flip_card: ^0.7.0
   image_picker: ^1.0.8
   animated_bottom_navigation_bar: ^1.3.3
+  flutter_native_splash: ^2.4.0
+  smart_text_flutter: ^0.2.1
  
  
   
@@ -121,6 +123,7 @@ flutter:
    - assets/SplashBack.png
    - assets/PinBon.png
    - assets/PinBon2.png
+   - assets/MK.png
   #  - packages/sbp/assets/sbp.png
   #  - packages/sbp/assets/icons/tinkoff.png
   #  - packages/sbp/assets/icons/sber.png
@@ -135,8 +138,9 @@ flutter_launcher_icons:
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 flutter_native_splash:
-  image: assets/ValBon.png
-  background_image: assets/SplashBack.png
+  image: assets/MK.png
+  color: "#000000"
+  #background_image: assets/SplashBack.png
   android: true
   ios: true
 

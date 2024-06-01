@@ -84,7 +84,7 @@ class _AllEventsPageState extends State<AllEventsPage> {
                 pinned: true,
                 snap: false,
                 floating: false,
-                expandedHeight: height / 20.0,
+                expandedHeight: height / 12.0,
                 // backgroundColor: Colors.transparent,
                 flexibleSpace: Stack(children: [
                   Container(
@@ -96,7 +96,7 @@ class _AllEventsPageState extends State<AllEventsPage> {
                 ])),
             SliverAppBar(
               // backgroundColor: Colors.transparent,
-              toolbarHeight: 12,
+              toolbarHeight: 15,
               pinned: true,
               snap: false,
               floating: false,
@@ -130,10 +130,10 @@ class _AllEventsPageState extends State<AllEventsPage> {
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: (index ==
                                                 stateCategory.selectedIndex)
-                                            ? Color.fromARGB(255, 236, 234, 214)
-                                            : kPrimaryColor.withOpacity(0.6),
+                                            ? Color.fromARGB(224, 29, 29, 29)
+                                            : Color.fromARGB(186, 62, 62, 62),
                                         minimumSize:
-                                            Size(height * 0.12, width * 0.25),
+                                            Size(height * 0.12, width * 0.35),
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(
                                               12), // <-- Radius
@@ -159,7 +159,7 @@ class _AllEventsPageState extends State<AllEventsPage> {
                                               fontWeight: FontWeight.w700,
                                               fontSize: 12,
                                               color: Color.fromARGB(
-                                                  228, 218, 58, 47))),
+                                                  227, 238, 238, 238))),
                                     ),
                                   );
                                 });
