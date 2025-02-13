@@ -49,14 +49,14 @@ class SigninOrSignupScreenState extends State<SigninOrSignupScreen> {
                             child: Column(children: [
                           SizedBox(height: kDefaultPadding * 3),
                           Container(
-                              height: height / 5,
+                              height: height * 0.3,
                               decoration: const BoxDecoration(
                                 borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(25),
                                     bottomRight: Radius.circular(25)),
                                 image: DecorationImage(
                                   image: AssetImage(
-                                    "assets/PinBon.png",
+                                    "assets/MK.png",
                                   ),
                                   opacity: 0.90,
                                   fit: BoxFit.fitHeight,
@@ -156,7 +156,7 @@ class SigninOrSignupScreenState extends State<SigninOrSignupScreen> {
 
                           // Spacer(flex: 2),
                           // Spacer(),
-                          SizedBox(height: kDefaultPadding * 1.5),
+                          SizedBox(height: kDefaultPadding),
                           Text(textStatus, style: TextStyle(color: Colors.red)),
                           // BlocBuilder<AuthBloc, AuthState>(
                           //   builder: (context, state) {
@@ -164,7 +164,7 @@ class SigninOrSignupScreenState extends State<SigninOrSignupScreen> {
                           //         style: TextStyle(color: Colors.red));
                           //   },
                           // ),
-                          SizedBox(height: kDefaultPadding * 0.5),
+
                           ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
@@ -179,7 +179,7 @@ class SigninOrSignupScreenState extends State<SigninOrSignupScreen> {
                               child: Text(
                                 "Войти",
                                 style: TextStyle(
-                                    color: Color.fromARGB(221, 31, 31, 31),
+                                    color: Color.fromARGB(255, 246, 246, 246),
                                     fontSize: 14),
                               ),
                               onPressed: () async {
@@ -255,7 +255,7 @@ class SigninOrSignupScreenState extends State<SigninOrSignupScreen> {
                             child: Text(
                               "Зарегистрироваться",
                               style: TextStyle(
-                                  color: Color.fromARGB(215, 42, 42, 42)),
+                                  color: Color.fromARGB(247, 255, 255, 255)),
                             ),
                             onPressed: () async {
                               dynamic result = await showDialog(

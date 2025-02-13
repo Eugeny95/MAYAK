@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:mayak/PushNotificationService/cloud_message_controller.dart';
 
 import 'package:mayak/buisiness/all_events_page_bloc/select_category_bloc/bloc/select_category_bloc.dart';
 import 'package:mayak/buisiness/auth_bloc/auth_bloc.dart';
@@ -19,6 +20,14 @@ import 'ui/new_event_page/create_event_page.dart';
 import 'ui/profile_page/profile_page.dart';
 
 void main() async {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  //notifications
+  await CloudMessage.startCloudMessageService();
+  await CloudMessage.getDeviceToken();
+  String? token = await CloudMessage.getDeviceToken();
+  print('This is Token: ' '${token}');
+  //notifications
   runApp(MyApp());
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "241274014461",
+    "project_id": "eventsapp-8e425",
+    "storage_bucket": "eventsapp-8e425.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:241274014461:android:df033dc738cf921fe14c94",
+        "android_client_info": {
+          "package_name": "com.yappa.mayak"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDE082WjuMf2DK7o32MzeYunHI87I7_KBo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

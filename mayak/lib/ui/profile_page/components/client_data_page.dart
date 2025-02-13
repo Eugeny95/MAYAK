@@ -37,10 +37,8 @@ class _ClientDataPageState extends State<ClientDataPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Padding(padding: EdgeInsets.only(top: height * 0.15)),
                   Container(
-                      width: width * 0.9,
-                      child: Image.asset('assets/PinBon.png')),
+                      width: width * 0.7, child: Image.asset('assets/MK.png')),
                   Padding(padding: EdgeInsets.only(top: 70)),
                   Text('Вы не авторизованы'),
                   SizedBox(
@@ -50,7 +48,7 @@ class _ClientDataPageState extends State<ClientDataPage> {
                       child: Text(
                         'Войти',
                         style: TextStyle(
-                            color: const Color.fromARGB(255, 75, 75, 75)),
+                            color: Color.fromARGB(255, 237, 237, 237)),
                       ),
                       onPressed: () async {
                         AuthBloc authBloc = BlocProvider.of<AuthBloc>(context);

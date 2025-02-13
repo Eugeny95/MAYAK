@@ -48,7 +48,7 @@ class RegisterDialogState extends State<RegisterDialog> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return AlertDialog(
-      backgroundColor: Color.fromARGB(255, 236, 234, 214),
+      backgroundColor: Color.fromARGB(255, 246, 246, 246),
       insetPadding: EdgeInsets.all(30),
       title: Text(
         'Регистрация',
@@ -459,7 +459,7 @@ class RegisterDialogState extends State<RegisterDialog> {
                         },
                         child: Text('Зарегистрироваться',
                             style: TextStyle(
-                                color: Color.fromARGB(217, 54, 54, 54)))),
+                                color: Color.fromARGB(239, 255, 255, 255)))),
                     Padding(padding: EdgeInsets.only(top: height * 0.01)),
                     TextButton(
                       child: Text('Отмена',
